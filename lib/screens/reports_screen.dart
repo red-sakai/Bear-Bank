@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../state/transaction_provider.dart';
 import '../models/models.dart';
+import '../widgets/scattered_images_background.dart';
 
 class ReportsScreen extends StatelessWidget {
   const ReportsScreen({super.key});
@@ -30,29 +31,34 @@ class ReportsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Reports')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: ListView(
-          children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    const Text('Spending Breakdown'),
-                    const SizedBox(height: 12),
-                    SizedBox(
-                      height: 220,
-                      child: data.isEmpty
-                          ? const Center(child: Text('No expenses yet'))
-                          : PieChart(PieChartData(sections: sections)),
+      body: Stack(
+        children: [
+          const ScatteredImagesBackground(),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView(
+              children: [
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        const Text('Spending Breakdown'),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          height: 220,
+                          child: data.isEmpty
+                              ? const Center(child: Text('No expenses yet'))
+                              : PieChart(PieChartData(sections: sections)),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

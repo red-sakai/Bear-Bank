@@ -7,6 +7,7 @@ import '../models/models.dart';
 import '../state/budget_provider.dart';
 import '../state/transaction_provider.dart';
 import '../widgets/budget_progress.dart';
+import '../widgets/scattered_images_background.dart';
 
 class BudgetsScreen extends StatelessWidget {
   const BudgetsScreen({super.key});
@@ -19,27 +20,32 @@ class BudgetsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Budgets')),
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: budgets.length,
-        itemBuilder: (context, index) {
-          final b = budgets[index];
-          final spent = txs.totalForCategory(now.year, now.month, b.category);
-          return Card(
-            margin: const EdgeInsets.symmetric(vertical: 8),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(b.category.label, style: Theme.of(context).textTheme.titleMedium),
-                  const SizedBox(height: 8),
-                  BudgetProgress(label: 'This month', spent: spent, limit: b.limit),
-                ],
-              ),
-            ),
-          );
-        },
+      body: Stack(
+        children: [
+          const ScatteredImagesBackground(),
+          ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: budgets.length,
+            itemBuilder: (context, index) {
+              final b = budgets[index];
+              final spent = txs.totalForCategory(now.year, now.month, b.category);
+              return Card(
+                margin: const EdgeInsets.symmetric(vertical: 8),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(b.category.label, style: Theme.of(context).textTheme.titleMedium),
+                      const SizedBox(height: 8),
+                      BudgetProgress(label: 'This month', spent: spent, limit: b.limit),
+                    ],
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => _showAddBudgetDialog(context),

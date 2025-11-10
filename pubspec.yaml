@@ -68,6 +68,8 @@ flutter:
   assets:
     - assets/gifs/
     - assets/audio/
+    - assets/images/couple-pics/
+    - assets/images/memes/
 
 flutter_launcher_icons:
   image_path: assets/images/BEAR-BANK.png
