@@ -183,8 +183,8 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
       },
     );
 
-    // Keep it on screen for ~3 seconds
-    await Future.delayed(const Duration(seconds: 3));
+  // Keep it on screen for ~6 seconds
+  await Future.delayed(const Duration(seconds: 6));
     if (mounted) {
       Navigator.of(context, rootNavigator: true).pop();
     }
@@ -268,7 +268,7 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
       },
     );
 
-    await Future.delayed(const Duration(seconds: 3));
+  await Future.delayed(const Duration(seconds: 6));
     if (mounted) {
       Navigator.of(context, rootNavigator: true).pop();
     }

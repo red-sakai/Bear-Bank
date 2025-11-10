@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '../state/transaction_provider.dart';
 import '../models/category.dart';
 import '../widgets/scattered_images_background.dart';
+import '../utils/currency.dart';
 
 class TransactionsScreen extends StatelessWidget {
   const TransactionsScreen({super.key});
@@ -28,7 +29,7 @@ class TransactionsScreen extends StatelessWidget {
                 title: Text(t.note.isEmpty ? t.category.label : t.note),
                 subtitle: Text(DateFormat.yMMMd().format(t.date)),
                 trailing: Text(
-                  '$sign${t.amount.toStringAsFixed(2)}',
+                  '$sign${formatPeso(t.amount)}',
                   style: TextStyle(color: t.isExpense ? Colors.red : Colors.green, fontWeight: FontWeight.bold),
                 ),
               );

@@ -54,8 +54,9 @@ class _SplashScreenState extends State<SplashScreen> {
       final budgetBox = await Hive.openBox<Budget>('budgets');
       _status = 'Finalizing';
       setState(() {});
-      // Small delay to let user see splash
-      await Future.delayed(const Duration(seconds: 1));
+  // Extended delay so user sees the splash for ~7 seconds total.
+  // We already spent some time initializing; enforce minimum display duration.
+  await Future.delayed(const Duration(seconds: 5));
       if (!mounted) return;
       _player.stop();
       Navigator.of(context).pushReplacement(

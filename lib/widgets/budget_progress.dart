@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../utils/currency.dart';
 
 class BudgetProgress extends StatelessWidget {
   final double spent;
@@ -22,7 +23,7 @@ class BudgetProgress extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(label, style: Theme.of(context).textTheme.bodyLarge),
-            Text("${spent.toStringAsFixed(2)} / ${limit.toStringAsFixed(2)}",
+      Text("${formatPeso(spent)} / ${formatPeso(limit)}",
                 style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),

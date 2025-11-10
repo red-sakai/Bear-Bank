@@ -8,6 +8,7 @@ import '../state/transaction_provider.dart';
 import '../widgets/budget_progress.dart';
 import '../widgets/scattered_images_background.dart';
 import 'new_transaction_screen.dart';
+import '../utils/currency.dart';
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -15,7 +16,7 @@ class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final now = DateTime.now();
-    final monthLabel = DateFormat('MMMM yyyy').format(now);
+  final monthLabel = DateFormat('MMMM yyyy').format(now);
     final txs = context.watch<TransactionProvider>();
     final budgets = context.watch<BudgetProvider>();
 
@@ -103,7 +104,7 @@ class DashboardScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(label),
-        Text(NumberFormat.simpleCurrency().format(amount),
+        Text(formatPeso(amount),
             style: Theme.of(context).textTheme.titleMedium?.copyWith(color: color, fontWeight: FontWeight.bold)),
       ],
     );
