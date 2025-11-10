@@ -3,6 +3,7 @@ import 'dashboard_screen.dart';
 import 'transactions_screen.dart';
 import 'budgets_screen.dart';
 import 'reports_screen.dart';
+import 'instructions_screen.dart';
 
 class HomeShell extends StatefulWidget {
   const HomeShell({super.key});
@@ -18,6 +19,7 @@ class _HomeShellState extends State<HomeShell> {
     TransactionsScreen(),
     BudgetsScreen(),
     ReportsScreen(),
+    InstructionsScreen(),
   ];
 
   @override
@@ -32,6 +34,7 @@ class _HomeShellState extends State<HomeShell> {
           NavigationDestination(icon: Icon(Icons.list_alt_outlined), selectedIcon: Icon(Icons.list_alt), label: 'Transactions'),
           NavigationDestination(icon: Icon(Icons.account_balance_wallet_outlined), selectedIcon: Icon(Icons.account_balance_wallet), label: 'Budgets'),
           NavigationDestination(icon: Icon(Icons.pie_chart_outline), selectedIcon: Icon(Icons.pie_chart), label: 'Reports'),
+          NavigationDestination(icon: Icon(Icons.help_outline), selectedIcon: Icon(Icons.help), label: 'Instructions'),
         ],
       ),
     );

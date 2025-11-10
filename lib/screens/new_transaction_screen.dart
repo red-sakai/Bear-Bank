@@ -92,6 +92,8 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
                   await context.read<TransactionProvider>().add(tx);
                   if (_isExpense) {
                     await _showDuduAngry();
+                  } else {
+                    await _showBubuMoney();
                   }
                   if (mounted) Navigator.pop(context);
                 },
@@ -187,6 +189,89 @@ class _NewTransactionScreenState extends State<NewTransactionScreen> {
       Navigator.of(context, rootNavigator: true).pop();
     }
     // Stop audio after close if still playing
+    try {
+      await _player.stop();
+    } catch (_) {}
+  }
+
+  Future<void> _showBubuMoney() async {
+    // Play audio
+    try {
+      await _player.stop();
+    } catch (_) {}
+    await _player.play(AssetSource('audio/bubu_money.mp3'));
+
+    if (!mounted) return;
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: false,
+      barrierLabel: 'bubu_money',
+      barrierColor: Colors.black26,
+      transitionDuration: const Duration(milliseconds: 250),
+      pageBuilder: (ctx, a1, a2) => const SizedBox.shrink(),
+      transitionBuilder: (ctx, anim, _, __) {
+        final scale = Tween<double>(begin: 0.9, end: 1.0).animate(CurvedAnimation(parent: anim, curve: Curves.easeOutBack));
+        final opacity = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(parent: anim, curve: Curves.easeOut));
+        return Opacity(
+          opacity: opacity.value,
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              BackdropFilter(
+                filter: ui.ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                child: const SizedBox.expand(),
+              ),
+              Center(
+                child: ScaleTransition(
+                  scale: scale,
+                  child: Material(
+                    color: Colors.white,
+                    elevation: 12,
+                    borderRadius: BorderRadius.circular(24),
+                    child: Container(
+                      width: 300,
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(24),
+                        boxShadow: [
+                          BoxShadow(color: Colors.black.withOpacity(0.1), blurRadius: 16, offset: const Offset(0, 8)),
+                        ],
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(16),
+                            child: Image.asset('assets/gifs/bubu_money.gif', height: 180, fit: BoxFit.cover),
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            'Bubu loves that income! 💰',
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            'Nice boost to your budget.',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.grey[600]),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+
+    await Future.delayed(const Duration(seconds: 3));
+    if (mounted) {
+      Navigator.of(context, rootNavigator: true).pop();
+    }
     try {
       await _player.stop();
     } catch (_) {}
