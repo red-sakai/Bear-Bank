@@ -68,6 +68,7 @@ flutter:
   assets:
     - assets/gifs/
     - assets/audio/
+    - assets/audio/music_player/
     - assets/images/couple-pics/
     - assets/images/memes/
 

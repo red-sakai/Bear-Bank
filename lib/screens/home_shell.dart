@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dashboard_screen.dart';
+import '../widgets/music_player_overlay.dart';
 import 'transactions_screen.dart';
 import 'budgets_screen.dart';
 import 'reports_screen.dart';
@@ -33,7 +34,12 @@ class _HomeShellState extends State<HomeShell> {
 
     return Scaffold(
       // Preserve state of each page using IndexedStack instead of rebuilding when switching.
-      body: IndexedStack(index: _index, children: _pages),
+      body: Stack(
+        children: [
+          IndexedStack(index: _index, children: _pages),
+          const MusicPlayerOverlay(),
+        ],
+      ),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
           height: 62,

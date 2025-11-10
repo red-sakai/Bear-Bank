@@ -10,6 +10,7 @@ import 'screens/new_transaction_screen.dart';
 import 'screens/transactions_screen.dart';
 import 'screens/budgets_screen.dart';
 import 'screens/reports_screen.dart';
+import 'services/music_player_controller.dart';
 
 class AppShell extends StatelessWidget {
   final Box<BankTransaction> txBox;
@@ -22,6 +23,7 @@ class AppShell extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => TransactionProvider(txBox)),
         ChangeNotifierProvider(create: (_) => BudgetProvider(budgetBox)),
+        ChangeNotifierProvider(create: (_) => MusicPlayerController()),
       ],
       child: MaterialApp(
         title: 'Bear Bank',
